@@ -18,7 +18,6 @@ services:
           memory: 1G
     cpuset: "0,1"
     volumes:
-      - ./maps:/maps:ro
       - ./plugins:/plugins:ro
 
   l4d2server2:
@@ -39,5 +38,4 @@ services:
           memory: 1G
     cpuset: "2,3"
     volumes:
-      - ./maps:/maps:ro
       - ./plugins:/plugins:ro

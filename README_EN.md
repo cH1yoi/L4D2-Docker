@@ -5,6 +5,7 @@
 A minimalist Left 4 Dead 2 server Docker image built on Debian 12 (Bookworm).
 
 ## Features
+
 - Built on Debian 12 stable
 - Minimal installation with essential components only
 - Multi-instance deployment support
@@ -14,12 +15,15 @@ A minimalist Left 4 Dead 2 server Docker image built on Debian 12 (Bookworm).
 ## Quick Start
 
 ### Pull Image
+
 ```bash
 docker pull ayasehana/l4d2:latest
 ```
 
 ### Docker Compose Deployment
+
 Create docker-compose.yml:
+
 ```yaml
 version: "3.8"
 services:
@@ -40,6 +44,7 @@ services:
 ```
 
 Start service:
+
 ```bash
 docker compose up -d
 ```
@@ -47,34 +52,39 @@ docker compose up -d
 ## Server Management
 
 ### Start Server
+
 ```bash
 docker compose up -d
 ```
 
 ### View Logs
+
 ```bash
 docker logs l4d2server
 ```
 
 ### Enter Container
+
 ```bash
 docker exec -it l4d2server bash
 ```
 
 ### Stop Server
+
 ```bash
 docker compose down
 ```
 
 ### Restart Server
+
 ```bash
 docker compose restart
 ```
 
 ## Directory Structure
+
 ```
 .
-├── maps/           # Maps directory
 ├── plugins/        # Plugins directory
 └── docker-compose.yml
 ```
@@ -82,6 +92,7 @@ docker compose restart
 ## Resource Limitations
 
 Resource limits are configured in docker-compose.yml through deploy settings:
+
 - CPU limit: 2 cores recommended per instance
 - Memory limit: 2GB recommended per instance
 - Adjustable based on actual hardware configuration
@@ -96,18 +107,19 @@ Resource limits are configured in docker-compose.yml through deploy settings:
 ## Troubleshooting
 
 1. Server won't start
+
    ```bash
    # Check logs
    docker logs l4d2server
    ```
-
 2. Can't connect to server
+
    ```bash
    # Check ports
    netstat -tunlp | grep 27015
    ```
-
 3. Resource usage issues
+
    ```bash
    # Check resource usage
    docker stats l4d2server
@@ -126,6 +138,7 @@ docker exec -it l4d2server bash
 ```
 
 After updating, restart the container:
+
 ```bash
 docker restart l4d2server
 ```
@@ -135,5 +148,6 @@ docker restart l4d2server
 MIT License
 
 ## Links
+
 - [Docker Hub](https://hub.docker.com/r/ayasehana/l4d2)
 - [GitHub Repository](https://github.com/cH1yoi/l4d2-docker)

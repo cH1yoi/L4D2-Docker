@@ -5,6 +5,7 @@
 Debian 12 (Bookworm) ベースの最小限のLeft 4 Dead 2サーバーDockerイメージ。
 
 ## 特徴
+
 - Debian 12安定版ベース
 - 必要最小限のコンポーネントのみ
 - マルチインスタンス展開対応
@@ -14,12 +15,15 @@ Debian 12 (Bookworm) ベースの最小限のLeft 4 Dead 2サーバーDockerイ�
 ## クイックスタート
 
 ### イメージの取得
+
 ```bash
 docker pull ayasehana/l4d2:latest
 ```
 
 ### Docker Composeでの展開
+
 docker-compose.yml の作成:
+
 ```yaml
 version: "3.8"
 services:
@@ -40,6 +44,7 @@ services:
 ```
 
 サービスの開始:
+
 ```bash
 docker compose up -d
 ```
@@ -47,34 +52,39 @@ docker compose up -d
 ## サーバー管理
 
 ### サーバー起動
+
 ```bash
 docker compose up -d
 ```
 
 ### ログの確認
+
 ```bash
 docker logs l4d2server
 ```
 
 ### コンテナへの接続
+
 ```bash
 docker exec -it l4d2server bash
 ```
 
 ### サーバー停止
+
 ```bash
 docker compose down
 ```
 
 ### サーバー再起動
+
 ```bash
 docker compose restart
 ```
 
 ## ディレクトリ構造
+
 ```
 .
-├── maps/           # マップディレクトリ
 ├── plugins/        # プラグインディレクトリ
 └── docker-compose.yml
 ```
@@ -82,6 +92,7 @@ docker compose restart
 ## リソース制限
 
 docker-compose.yml の deploy 設定によるリソース制限:
+
 - CPU制限：インスタンスごとに2コア推奨
 - メモリ制限：インスタンスごとに2GB推奨
 - 実際のハードウェア構成に応じて調整可能
@@ -96,18 +107,19 @@ docker-compose.yml の deploy 設定によるリソース制限:
 ## トラブルシューティング
 
 1. サーバーが起動しない場合
+
    ```bash
    # ログの確認
    docker logs l4d2server
    ```
-
 2. サーバーに接続できない場合
+
    ```bash
    # ポートの確認
    netstat -tunlp | grep 27015
    ```
-
 3. リソース使用量の問題
+
    ```bash
    # リソース使用状況の確認
    docker stats l4d2server
@@ -126,6 +138,7 @@ docker exec -it l4d2server bash
 ```
 
 更新後、コンテナを再起動する必要があります：
+
 ```bash
 docker restart l4d2server
 ```
@@ -135,5 +148,6 @@ docker restart l4d2server
 MIT License
 
 ## リンク
+
 - [Docker Hub](https://hub.docker.com/r/ayasehana/l4d2)
 - [GitHub Repository](https://github.com/cH1yoi/l4d2-docker)
