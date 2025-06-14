@@ -3,14 +3,17 @@
 if [ -d "/plugins" ] && [ "$(ls -A /plugins)" ]; then
     echo "Creating plugins symlinks..."
     for plugin in /plugins/*; do
-        [ -e "$plugin" ] && ln -sf "$plugin" "/home/hana/l4d2/left4dead2$(basename "$plugin")"
-        echo "Linked plugin: $plugin -> /home/hana/l4d2/left4dead2/$(basename "$plugin")"
+        if [ -e "$plugin" ]; then
+            target="/home/hana/l4d2/left4dead2/$(basename "$plugin")"
+            ln -sf "$plugin" "$target"
+            echo "Linked plugin: $plugin -> $target"
+        fi
     done
 fi
 
 echo "Current plugins in addons:"
-ls -l /home/hana/l4d2/left4dead2/
+ls -la /home/hana/l4d2/left4dead2/addons/
 
 echo "Starting server with command:"
-echo "/home/hana/l4d2/srcds_run $@"
-exec /home/hana/l4d2/srcds_run "$@"
+echo "/home/hana/l4d2/srcds_run ${*}"
+exec /home/hana/l4d2/srcds_run ${*}
