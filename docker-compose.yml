@@ -1,0 +1,43 @@
+version: "3.8"
+services:
+  l4d2server1:
+    image: ayasehana/l4d2
+    container_name: "10721"
+    command: "-game left4dead2 -sv_lan 0 +hostport 10721 +sv_clockcorrection_msecs 25 -timeout 10 -tickrate 100 -maxplayers 31 +sv_setmax 31 +map c2m1_highway +servercfgfile versus.cfg"
+    restart: unless-stopped
+    stdin_open: true
+    network_mode: host
+    tty: true
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+        reservations:
+          cpus: '1'
+          memory: 1G
+    cpuset: "0,1"
+    volumes:
+      - ./maps:/maps:ro
+      - ./plugins:/plugins:ro
+
+  l4d2server2:
+    image: ayasehana/l4d2
+    container_name: "20721"
+    command: "-game left4dead2 -sv_lan 0 +hostport 20721 +sv_clockcorrection_msecs 25 -timeout 10 -tickrate 100 -maxplayers 31 +sv_setmax 31 +map c2m1_highway +servercfgfile versus.cfg"
+    restart: unless-stopped
+    stdin_open: true
+    network_mode: host
+    tty: true
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+        reservations:
+          cpus: '1'
+          memory: 1G
+    cpuset: "2,3"
+    volumes:
+      - ./maps:/maps:ro
+      - ./plugins:/plugins:ro
