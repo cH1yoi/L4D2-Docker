@@ -2,24 +2,33 @@
 
 L4D2_DIR="/home/hana/l4d2/left4dead2"
 
-# 处理插件目录
-if [ -d "/plugins" ] && [ "$(ls -A /plugins)" ]; then
-    echo "Creating symlinks for all files and directories in plugins..."
-    for item in /plugins/*; do
+create_symlinks() {
+    local src="$1"
+    local dst="$2"
+    
+    for item in "$src"/*; do
         if [ -e "$item" ]; then
-            basename=$(basename "$item")
-            target="$L4D2_DIR/$basename"
+            local basename=$(basename "$item")
+            local target="$dst/$basename"
             
-            if [ -e "$target" ] && [ ! -L "$target" ]; then
-                echo "Skipping existing directory/file: $target"
-                continue
-            }
-            
-            # 创建软链接
-            ln -sf "$item" "$target"
-            echo "Created symlink: $item -> $target"
+            if [ -d "$item" ]; then
+                mkdir -p "$target"
+                create_symlinks "$item" "$target"
+            else
+                if [ ! -e "$target" ] || [ -L "$target" ]; then
+                    ln -sf "$item" "$target"
+                    echo "Created symlink: $item -> $target"
+                else
+                    echo "Skipping existing file: $target"
+                fi
+            fi
         fi
     done
+}
+
+if [ -d "/plugins" ] && [ "$(ls -A /plugins)" ]; then
+    echo "Creating symlinks recursively..."
+    create_symlinks "/plugins" "$L4D2_DIR"
 fi
 
 echo "Current contents in left4dead2 directory:"
